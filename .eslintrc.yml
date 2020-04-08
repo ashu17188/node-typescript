@@ -1,0 +1,22 @@
+---
+  extends: airbnb-base
+  env:
+    node: true
+    mocha: true
+    es6: true
+  parser: '@typescript-eslint/parser'
+  parserOptions:
+    sourceType: module
+    ecmaFeatures: 
+      modules: true
+  rules:
+    generator-star-spacing:
+      - 2
+      - before: true
+        after: true
+    array-bracket-spacing: "error"
+    array-callback-return: "error"
+    no-unused-vars: ["warn", {vars: "all", args: "after-used"}]
+    import/extensions: ["warn"]
+    import/no-unresolved: ["warn"]
+    import/prefer-default-export: ["warn"]
