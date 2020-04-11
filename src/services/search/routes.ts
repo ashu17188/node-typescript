@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
-import { getPlacesByName } from "./SearchController";
-import { checkSearchParams } from "../../middleware/checks";
+import { Request, Response } from 'express';
+import { getPlacesByName } from './SearchController';
+import { checkSearchParams } from '../../middleware/checks';
 
 export default [
   {
-    path: "/api/v1/search",
-    method: "get",
+    path: '/api/v1/search',
+    method: 'get',
     handler: [
       checkSearchParams,
       async ({ query }: Request, res: Response) => {
