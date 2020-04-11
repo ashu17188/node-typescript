@@ -11,3 +11,4 @@ coverage/
 .tscache
 sessions/
 certs/
+/.project
