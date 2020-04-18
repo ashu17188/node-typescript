@@ -33,6 +33,70 @@
           }
         ]
       }
+    },
+    "/posts":{
+      "get": {
+        "tags": ["Fetch review"],
+        "summary": "Get all posts from mysql database",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      },
+      "post": {
+        "tags": ["Post review"],
+        "summary": "Post review to get stored in mysql database",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+
+      },
+      "put": {
+        "tags": ["Update reviews by post id."],
+        "summary": "Update reivews stored in mysql database",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      }
+      ,
+      "delete": {
+        "tags": ["Delete reviews by post id."],
+        "summary": "Delete reivews stored in mysql database",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "content": {
+          "application/json": {}
+        }
+      }
     }
   }
 }
