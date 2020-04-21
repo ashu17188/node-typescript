@@ -1,6 +1,6 @@
 import { PokeService } from "./pokemon.service";
 
-export class Controller {
+export class PokemonController {
   private pokeService: PokeService;
 
   constructor(private app: any) {
@@ -13,7 +13,7 @@ export class Controller {
 
     this.app.route("/api/v1/mongo/pokemons").get(this.pokeService.getAllPokemon);
 
-    this.app.route("/api/v1/mongo/pokemon").post(this.pokeService.addNewPokemon);
+    this.app.route("/api/v1/mongo/pokemons").post(this.pokeService.addNewPokemon);
 
     this.app
       .route("/api/v1/mongo/pokemon/:id")
