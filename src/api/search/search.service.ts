@@ -1,15 +1,13 @@
 import { Request, Response } from 'express';
 import { OpenCageDataProviderService } from './providers/OpenCageDataProvider';
+import bodyParser from "body-parser";
 
 export class SearchService {
 
-  private openCageDataProviderService: OpenCageDataProviderService;
-
-  constructor() {
-    this.openCageDataProviderService = new OpenCageDataProviderService();
-  }
+  constructor() {}
 
   public getPlacesByName(req: Request, res: Response) {
+    let openCageDataProviderService= new OpenCageDataProviderService;
     let q = req.query.q;
     console.log(`Param is: ${q}`);
     if (q.length < 3) {
@@ -18,20 +16,15 @@ export class SearchService {
         features: [],
       };
     }
-    return res.json(new OpenCageDataProviderService().getPlaces(q));
-    //return new OpenCageDataProviderService().getPlaces(q);
+    const response  = openCageDataProviderService.getPlaces(q);
+    let resp :any;
+    // response.then(
+    //   (      data: string) => {console.log(bodyParser.json(data));
+    //     return data;
+    //     resp =data;
+    //   }
+    // );
+    return response;
 
   };
-
 }
-
-// export const getPlacesByName = async (q: string) => {
-//   if (q.length < 3) {
-//     return {
-//       type: 'FeatureCollection',
-//       features: [],
-//     };
-//   }
-
-//   return getPlaces(q);
-// };

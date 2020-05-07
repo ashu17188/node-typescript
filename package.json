@@ -40,15 +40,17 @@
     "compression": "^1.7.3",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
+    "es6-promise": "^4.2.8",
     "express": "^5.0.0-alpha.7",
+    "isomorphic-fetch": "^2.2.1",
+    "mongoose": "^5.3.15",
     "pm2": "^3.2.9",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "supertest": "^3.4.1",
     "swagger-ui-express": "^4.0.2",
     "tsc-watch": "^1.0.31",
-    "typescript": "^3.2.2",
-    "mongoose": "^5.3.15"
+    "typescript": "^3.2.2"
   },
   "devDependencies": {
     "@types/jest": "^23.3.10",
