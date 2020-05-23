@@ -20,3 +20,4 @@ OPEN_CAGE_DATA_KEY=8c0892514e884f09af7c09a9b067b02b
 # References:
 ```https://github.com/alexpermyakov/node-rest-api/```
 ```https://opencagedata.com/```
+```Swagger editor reference: https://editor.swagger.io/```

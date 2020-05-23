@@ -4,6 +4,7 @@ import { Request, Response } from 'express'
 import { connect } from '../../database'
 // Interfaces
 import { Post } from './post';
+import { format } from 'mysql2/promise';
 
 export class PostService{
     constructor(){}
@@ -22,17 +23,31 @@ export class PostService{
     async createPost(req: Request, res: Response) {
         const newPost: Post = req.body;
         const conn = await connect();
-        console.log(`Req obj : ${[newPost]}`);
-        await conn.query('INSERT INTO posts SET ?', [newPost]);
+        console.log( JSON.stringify(req.body));
+        const sql = format('INSERT INTO posts SET ?', [newPost]);
+        
+        console.log(sql);
+        let postQuery = await conn.query(sql).then(data=>{
+            console.log(data);
+        }
+           
+        ).catch(err=>{ 
+            throw err;
+        });
         res.json({
             message: 'New Post Created'
         });
     }
     
-    async getPost(req: Request, res: Response) {
+
+    
+    async getPostById(req: Request, res: Response) {
         const id = req.params.postId;
+        console.log(req.params);
         const conn = await connect();
-        const posts = await conn.query('SELECT * FROM posts WHERE id = ?', [id]);
+        const sql = format('SELECT * FROM posts WHERE id = ?', [id]);
+        console.log(sql);
+        const posts = await conn.query(sql);
         res.json(posts[0]);
     }
     
@@ -46,10 +61,12 @@ export class PostService{
     }
     
     async updatePost(req: Request, res: Response) {
-        const id = req.params.postId;
         const updatePost: Post = req.body;
+        const id = updatePost.id;
         const conn = await connect();
-        await conn.query('UPDATE posts set ? WHERE id = ?', [updatePost, id]);
+        const sql = format('UPDATE posts set ? WHERE id = ?', [updatePost, id]);
+        console.log(`Update sql : ${sql}`);
+        await conn.query(sql);
         res.json({
             message: 'Post Updated'
         });

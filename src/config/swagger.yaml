@@ -1,0 +1,169 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters."
+  version: "1.0.0"
+  title: "Swagger Nodejs"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3000"
+basePath: "/api/v1"
+tags:
+- name: "posts"
+  description: "Everything about your Pets"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "http"
+paths:
+  /posts:
+    get:
+      tags:
+      - "posts"
+      summary: "Finds Pets by status"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findPetsByStatus"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid status value"
+      security:
+      - petstore_auth:
+        - "write:posts"
+        - "read:posts"
+    post:
+      tags:
+      - "reivew"
+      summary: "Add a new review for website"
+      description: ""
+      operationId: "addReview"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Post a review to store"
+        required: true
+      responses:
+        "405":
+          description: "Invalid input"
+    put:
+      tags:
+      - "reivew"
+      summary: "Updates a new review for website"
+      description: ""
+      operationId: "updateReview"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Updates a review to store"
+        required: true
+      responses:
+        "405":
+          description: "Invalid input"
+  /posts/{postId}:
+    get:
+      tags:
+      - "postId"
+      summary: "Find review by ID"
+      description: "Returns a single review"
+      operationId: "getReviewById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "postId"
+        in: "path"
+        description: "id of review to return"
+        required: true
+        type: "number"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Review not found"
+    delete:
+      tags:
+      - "posts"
+      summary: "Deletes a review"
+      description: ""
+      operationId: "deleteReview"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "postId"
+        in: "path"
+        description: "Review id to delete"
+        required: true
+        type: "integer"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Review not found"      
+
+
+definitions:
+  posts:
+    type: "object"
+    required:
+    - "id"
+    - "imageUrls"
+    properties:
+      id:
+        type: "number"
+      title:
+        type: "string"
+        example: ""
+      description:
+        type: "string"
+        example: ""
+      imageUrl:
+        type: "string"
+        example: ""
+      createdAt:
+        type: "Date"
+        example: ""
+
+      status:
+        type: "string"
+        description: "posts status in the store"
+        enum:
+        - "available"
+        - "pending"
+        - "sold"
+    xml:
+      name: "posts"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
