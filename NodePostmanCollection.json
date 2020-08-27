@@ -1,0 +1,256 @@
+{
+	"variables": [],
+	"info": {
+		"name": "NodeTypescriptCollection",
+		"_postman_id": "24a06e77-9c76-a842-75e8-3877cd4d4593",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register_User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"token\"] = jsonData.value !== '';",
+							"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/api/v1/user/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\": \"me\",\r\n\t\"password\": \"pass\",\r\n\t\"scope\": [\"products\"]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Pokemons_save",
+			"request": {
+				"url": "http://localhost:3000/api/v1/mongo/pokemons",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"pokemon\",\n    \"gender\": \"String\",\n    \"type\": \"String\",\n    \"height\": 12,\n    \"weight\": 80,\n    \"photo\": \"String\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Pokemons_Get_All",
+			"request": {
+				"url": "http://localhost:3000/api/v1/mongo/pokemons",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Pokemons_Delete_By_Id",
+			"request": {
+				"url": "http://localhost:3000/api/v1/mongo/pokemons/5f4792ab000ac808e76e5b6e",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Pokemons_Update_By_Id",
+			"request": {
+				"url": "http://localhost:3000/api/v1/mongo/pokemons/5f4792b6000ac808e76e5b6f",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"name\": \"pokemon\",\n        \"gender\": \"String\",\n        \"type\": \"String\",\n        \"height\": 24,\n        \"weight\": 90,\n        \"photo\": \"String\",\n        \"id\": \"5f4792b6000ac808e76e5b6f\"\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Posts_Save",
+			"request": {
+				"url": "http://localhost:3000/api/v1/posts",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"456\",\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"imageUrl\": \"string\",\n    \"createdAt\": \"2020-08-28\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Posts_Get_All",
+			"request": {
+				"url": "http://localhost:3000/api/v1/posts",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Posts_Get_By_Id",
+			"request": {
+				"url": "http://localhost:3000/api/v1/posts/123",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Posts_Delete_By_Id",
+			"request": {
+				"url": "http://localhost:3000/api/v1/posts/123",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Posts_Update_By_Id",
+			"request": {
+				"url": "http://localhost:3000/api/v1/posts",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n        \"id\": 456,\n        \"title\": \"Cricket is good game\",\n        \"description\": \"string\",\n        \"imageUrl\": \"string\",\n        \"createdAt\": \"2020-08-27\"\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

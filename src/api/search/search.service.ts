@@ -7,24 +7,19 @@ export class SearchService {
   constructor() {}
 
   public getPlacesByName(req: Request, res: Response) {
-    let openCageDataProviderService= new OpenCageDataProviderService;
-    let q = req.query.q;
-    console.log(`Param is: ${q}`);
-    if (q.length < 3) {
-      return {
-        type: 'FeatureCollection',
-        features: [],
-      };
-    }
-    const response  = openCageDataProviderService.getPlaces(q);
-    let resp :any;
-    // response.then(
-    //   (      data: string) => {console.log(bodyParser.json(data));
-    //     return data;
-    //     resp =data;
-    //   }
-    // );
-    return response;
-
+    // let openCageDataProviderService= new OpenCageDataProviderService;
+    // const q: string = req.query.q;
+    // console.log(`Param is: ${q}`);
+    // if (q.length < 3) {
+    //   return {
+    //     type: 'FeatureCollection',
+    //     features: [],
+    //   };
+    // }
+    // const response  = openCageDataProviderService.getPlaces(q);
+    // let resp :any;
+   
+    // return response;
+    return null;
   };
 }

@@ -7,6 +7,7 @@ export class PokeService {
 
   constructor(){}
   public welcomeMessage(req: Request, res: Response) {
+    console.log('welcomeMessage');
     res.status(200).send(WELCOME_MESSAGE);
   }
 

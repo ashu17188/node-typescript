@@ -1,23 +1,23 @@
 import { PokeService } from "./pokemon.service";
+import { AuthController } from "../../middleware/authController";
+import passport from "passport";
+import { Router } from "express";
 
 export class PokemonController {
-  private pokeService: PokeService;
-
-  constructor(private app: any) {
-    this.pokeService = new PokeService();
+  public router: Router;
+  private pokeService: PokeService =  new PokeService();
+  public authController: AuthController = new AuthController();
+  
+  constructor() {
+    this.router = Router()
     this.routes();
   }
 
   public routes() {
-    this.app.route("/api/v1/mongo/").get(this.pokeService.welcomeMessage);
-
-    this.app.route("/api/v1/mongo/pokemons").get(this.pokeService.getAllPokemon);
-
-    this.app.route("/api/v1/mongo/pokemons").post(this.pokeService.addNewPokemon);
-
-    this.app
-      .route("/api/v1/mongo/pokemon/:id")
-      .delete(this.pokeService.deletePokemon)
-      .put(this.pokeService.updatePokemon);
+    this.router.get("/", this.pokeService.welcomeMessage);
+    this.router.get("/pokemons",this.authController.authenticateJWT,this.pokeService.getAllPokemon);
+    this.router.post("/pokemons",this.authController.authenticateJWT,this.pokeService.addNewPokemon);
+    this.router.delete("/pokemons/:id", this.pokeService.deletePokemon);
+    this.router.put("/pokemons/:id", this.pokeService.updatePokemon);
   }
 }

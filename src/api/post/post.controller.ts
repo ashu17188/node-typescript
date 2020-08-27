@@ -1,20 +1,23 @@
 import { PostService } from "./post.service";
+import { Router } from "express";
+import { AuthController } from "../../middleware/authController";
 
 
 export class PostController {
+  public router: Router;
+  private postService: PostService = new PostService();;
+  public authController: AuthController = new AuthController();
 
-  private postService: PostService;
-
-  constructor(private app: any) {
-    this.postService = new PostService();
+  constructor() {
+    this.router = Router()
     this.routes();
   }
 
   public routes() {
-    this.app.route("/api/v1/posts").get(this.postService.getPosts);
-    this.app.route("/api/v1/posts").post(this.postService.createPost);
-    this.app.route("/api/v1/posts").put(this.postService.updatePost);
-    this.app.route("/api/v1/posts/:postId").get(this.postService.getPostById);
-    this.app.route("/api/v1/posts/:postId").delete(this.postService.deletePost);
+    this.router.get("",this.authController.authenticateJWT, this.postService.getPosts);
+    this.router.post("",this.authController.authenticateJWT, this.postService.createPost);
+    this.router.put("",this.authController.authenticateJWT, this.postService.updatePost);
+    this.router.get("/:postId",this.authController.authenticateJWT, this.postService.getPostById);
+    this.router.delete("/:postId",this.authController.authenticateJWT, this.postService.deletePost);
   }
 }
