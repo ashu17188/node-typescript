@@ -11,12 +11,13 @@ import { SearchController } from "./api/search/search.controller";
 import { PostController } from './api/post/post.controller';
 import compression from "compression";
 import { UserController } from "./api/user/user.controller";
+import { MONGODB_URI } from "./utils/secrets";
 
 
 class App {
   public app: any;
   public searchController:SearchController;
-  MONGODB_URI = 'mongodb://localhost:27017/admin';
+  
   constructor() {
     this.app = express();
     this._setConfig();
@@ -64,7 +65,7 @@ class App {
       console.log("Mongo Connection Disconnected");
       console.log("Trying to reconnect to Mongo ...");
       setTimeout(() => {
-        mongoose.connect(this.MONGODB_URI, {
+        mongoose.connect(MONGODB_URI, {
           autoReconnect: true, keepAlive: true,
           socketTimeoutMS: 3000, connectTimeoutMS: 3000
         });
@@ -78,7 +79,7 @@ class App {
     });
 
     const run = async () => {
-      await mongoose.connect(this.MONGODB_URI, {
+      await mongoose.connect(MONGODB_URI, {
         autoReconnect: true, keepAlive: true
       });
     };

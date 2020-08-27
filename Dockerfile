@@ -1,13 +1,22 @@
-FROM risingstack/alpine:3.4-v6.9.4-4.2.0
+FROM node:carbon
 
-ENV PORT 3001
+ENV NPM_CONFIG_LOGLEVEL info
+ENV NODE_ENV production
 
-EXPOSE 3001
+ADD dist /home/node/app/dist
+ADD package.json /home/node/app/package.json
 
-COPY package.json package.json
-RUN npm install
+ENV MONGODB_URI mongodb://localhost:27017/admin
+ENV JWT_SECRET ashdfjhasdlkjfhalksdjhflak
+ENV SALT_SECRET 8
 
-COPY . .
-RUN npm run build
+RUN chown -R node:node /home/node/app 
 
-CMD ["node", "dist/"]
+USER node
+WORKDIR /home/node/app
+RUN npm install --save
+
+EXPOSE 3000
+
+#CMD node dist/server.js
+CMD npm run watch
