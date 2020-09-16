@@ -7,7 +7,7 @@ RUN apk --update add git
 
 ENV NPM_CONFIG_LOGLEVEL info
 ##ENV NODE_ENV production
-##ENV MONGODB_URI mongodb://localhost:27017/admin
+ENV MONGODB_URI=mongodb://db:27017/admin
 ##ENV JWT_SECRET ashdfjhasdlkjfhalksdjhflak
 ##ENV SALT_SECRET 8
 

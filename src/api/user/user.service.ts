@@ -17,8 +17,8 @@ export class UserService {
 
     });
     const token = jwt.sign({ username: req.body.username, scope : req.body.scope }, process.env.JWT_SECRET as jwt.Secret);
-    logger.info(`Info Register user called for user ${process.env.LOG_LEVEL} ${req.body.username}, token: ${token}`);
-   // logger.debug(`Debug Register user called for user ${req.body.username}, token: ${token}`);
+  //  logger.info(`Info Register user called for user ${process.env.LOG_LEVEL} ${req.body.username}, token: ${token}`);
+    logger.debug(`Debug Register user called for user ${req.body.username}, token: ${token}`);
 
     res.status(200).send({ token: token });
   }

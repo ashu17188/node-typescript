@@ -21,8 +21,8 @@ OPEN_CAGE_DATA_KEY=8c0892514e884f09af7c09a9b067b02b
 
 - Using Docker
 ```
-    docker build -t node-typescript:1.0 .
-    docker run -d --name node-api -p 3000:3000 node-typescript:1.0
+    docker-compose build
+    docker-compose up
 ```
 
 # References:

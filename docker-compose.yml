@@ -1,16 +1,12 @@
 version: "3"
 services:
     db:
-      container_name: db
-      image: mongo
+      container_name: myMongo
+      image: mongo:4.4.1-bionic
       ports:
-       - "27017:27017"  
-      volumes:
-       - ./.data:/data/db
+       - "27017:27017"
     api:
-      container_name: api
+      container_name: node-api
       build: .
       ports :
        - "3000:3000"
-      volumes:
-        - ./:/home/node/app
