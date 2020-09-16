@@ -17,6 +17,14 @@ OPEN_CAGE_DATA_KEY=8c0892514e884f09af7c09a9b067b02b
 # Api Docs
 ```http://localhost:3000/api-docs```
 
+# To run application:
+
+- Using Docker
+```
+    docker build -t node-typescript:1.0 .
+    docker run -d --name node-api -p 3000:3000 node-typescript:1.0
+```
+
 # References:
 ```https://github.com/alexpermyakov/node-rest-api/```
 ```https://opencagedata.com/```

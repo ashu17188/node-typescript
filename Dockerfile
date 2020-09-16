@@ -1,22 +1,22 @@
-FROM node:carbon
+### STAGE 1: Build ###
+FROM node:14.8.0-alpine AS build
+
+LABEL maintainer Ashutosh Shukla <ashu17188@gmail.com>
+
+RUN apk --update add git
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_ENV production
+##ENV NODE_ENV production
+##ENV MONGODB_URI mongodb://localhost:27017/admin
+##ENV JWT_SECRET ashdfjhasdlkjfhalksdjhflak
+##ENV SALT_SECRET 8
 
-ADD dist /home/node/app/dist
-ADD package.json /home/node/app/package.json
+WORKDIR /usr/src/app
+COPY package.json ./
 
-ENV MONGODB_URI mongodb://localhost:27017/admin
-ENV JWT_SECRET ashdfjhasdlkjfhalksdjhflak
-ENV SALT_SECRET 8
-
-RUN chown -R node:node /home/node/app 
-
-USER node
-WORKDIR /home/node/app
-RUN npm install --save
+COPY . .
+RUN npm install
 
 EXPOSE 3000
-
-#CMD node dist/server.js
-CMD npm run watch
+#CMD [ "npm", "start" ]
+CMD [ "node", "dist/server.js" ]

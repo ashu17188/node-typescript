@@ -2,14 +2,14 @@ import passport from "passport";
 import passportLocal from "passport-local";
 // import passportApiKey from "passport-headerapikey";
 import passportJwt from "passport-jwt";
-import { JWT_SECRET } from "../utils/secrets";
 import { User } from "../api/user/user";
-
+import dotenv from 'dotenv';
 
 const LocalStrategy = passportLocal.Strategy;
 const JwtStrategy = passportJwt.Strategy;
 const ExtractJwt = passportJwt.ExtractJwt;
-
+dotenv.config();
+const JWT_SECRET = process.env.JWT_SECRET;
 passport.use(new LocalStrategy({ usernameField: "username" }, (username, password, done) => {
   User.findOne({ username: username.toLowerCase() }, (err, user: any) => {
     if (err) { return done(err); }

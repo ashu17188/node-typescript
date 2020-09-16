@@ -11,13 +11,14 @@ import { SearchController } from "./api/search/search.controller";
 import { PostController } from './api/post/post.controller';
 import compression from "compression";
 import { UserController } from "./api/user/user.controller";
-import { MONGODB_URI } from "./utils/secrets";
-
+//import { MONGODB_URI } from "./utils/secrets";
+import { expressLogger } from "./middleware/logger";
+//require('dotenv').config();
+import dotenv from 'dotenv';
 
 class App {
   public app: any;
   public searchController:SearchController;
-  
   constructor() {
     this.app = express();
     this._setConfig();
@@ -35,6 +36,8 @@ class App {
     this.app.use(cors());
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(compression());
+    this.app.use(expressLogger);
+    dotenv.config();
   }
 
   public routes(): void {
@@ -44,16 +47,8 @@ class App {
     
   }
 
-
-
-  // private _setMongoConfig() {
-  //   mongoose.Promise = global.Promise;
-  //   mongoose.connect("mongodb://localhost:27017/admin", {
-  //     useNewUrlParser: true,useUnifiedTopology: true
-  //   });
-  // }
-
   private mongo() {
+    const MONGODB_URI:string =  process.env.MONGODB_URI || '';
     const connection = mongoose.connection;
     connection.on("connected", () => {
       console.log("Mongo Connection Established");
