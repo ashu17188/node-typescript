@@ -12,7 +12,7 @@ OPEN_CAGE_DATA_KEY=8c0892514e884f09af7c09a9b067b02b
 
 # Getting started
 1. ```npm install```
-2. ```npm run dev```
+2. ```npm start```
 
 # Api Docs
 ```http://localhost:3000/api-docs```
