@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
 // DB
-import { connect } from '../../database'
+import { connect } from '../../utils/database'
 // Interfaces
 import { Post } from './post';
 import { format } from 'mysql2/promise';

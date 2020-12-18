@@ -11,10 +11,9 @@ import { SearchController } from "./api/search/search.controller";
 import { PostController } from './api/post/post.controller';
 import compression from "compression";
 import { UserController } from "./api/user/user.controller";
-//import { MONGODB_URI } from "./utils/secrets";
 import { expressLogger } from "./middleware/logger";
-//require('dotenv').config();
 import dotenv from 'dotenv';
+import {MONGODB_URI} from './config';
 
 class App {
   public app: any;
@@ -48,7 +47,7 @@ class App {
   }
 
   private mongo() {
-    const MONGODB_URI:string =  process.env.MONGODB_URI || '';
+    // const MONGODB_URI:string =  MONGODB_URI || '';
     const connection = mongoose.connection;
     connection.on("connected", () => {
       console.log("Mongo Connection Established");

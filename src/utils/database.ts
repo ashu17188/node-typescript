@@ -1,11 +1,11 @@
 import { createPool, Pool } from 'mysql2/promise'
-
+import {db} from '../config';
 export async function connect(): Promise<Pool> {
     const connection = await createPool({
-        host: '127.0.0.1',
-        user: 'root',
-        password: 'root',
-        database: 'mydsn',
+        host: db.host,
+        user: db.user,
+        password: db.password,
+        database: db.schema,
         connectionLimit: 10
     });
     return connection;
